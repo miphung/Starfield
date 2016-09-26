@@ -1,15 +1,30 @@
-//your code here
+NormalParticle water = new NormalParticle();
+
 void setup()
 {
-	//your code here
+	size(512, 512);
 }
 void draw()
 {
-	//your code here
+	water.move();
+	water.show();
 }
 class NormalParticle
 {
-	//your code here
+	double dX,dY,dSpeed,dTheta;
+	NormalParticle(double x,y;)
+	{
+		dX = x;
+		dY = y;
+	}
+	void move()
+	{
+		dTheta = (Math.random()*3)*Math.PI;
+	}
+	void show()
+	{
+
+	}
 }
 interface Particle
 {
