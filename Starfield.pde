@@ -12,14 +12,18 @@ void draw()
 class NormalParticle
 {
 	double dX,dY,dSpeed,dTheta;
+	color c = color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
 	NormalParticle(double x,y;)
 	{
 		dX = x;
 		dY = y;
+		dTheta = (Math.random()*3)*Math.PI;
+		dSpeed = 8.25;
 	}
 	void move()
 	{
-		dTheta = (Math.random()*3)*Math.PI;
+		dX= x+Math.cos(dTheta) *dSpeed;
+		dY = y+Math.sin(dTheta)*dSpeed;
 	}
 	void show()
 	{
