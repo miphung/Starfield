@@ -1,4 +1,8 @@
-NormalParticle water = new NormalParticle();
+NormalParticle [] water = new NormalParticle[10];
+for (int i = 0; i<10; i++)
+{
+	water[i] = new NormalParticle();
+}
 
 void setup()
 {
@@ -12,22 +16,23 @@ void draw()
 class NormalParticle
 {
 	double dX,dY,dSpeed,dTheta;
-	color c = color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
-	NormalParticle(double x,y;)
+	NormalParticle()
 	{
-		dX = x;
-		dY = y;
+		dX = 256;
+		dY = 256;
 		dTheta = (Math.random()*3)*Math.PI;
 		dSpeed = 8.25;
 	}
 	void move()
 	{
-		dX= x+Math.cos(dTheta) *dSpeed;
-		dY = y+Math.sin(dTheta)*dSpeed;
+		dX = dX+Math.cos(dTheta)*dSpeed;
+		dY = dY+Math.sin(dTheta)*dSpeed;
 	}
 	void show()
 	{
-
+		noStroke();
+		fill (0, 0, (int)(Math.random()*255)+25);
+		ellipse((float)dX, (float)dY, 20, 20);
 	}
 }
 interface Particle
