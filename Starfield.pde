@@ -1,12 +1,13 @@
 NormalParticle [] water = new NormalParticle[10];
-for (int i = 0; i<10; i++)
-{
-	water[i] = new NormalParticle();
-}
 
 void setup()
 {
 	size(512, 512);
+	for (int i = 0; i<water.length; i++)
+	{
+		water[i] = new NormalParticle();
+	}
+
 }
 void draw()
 {
