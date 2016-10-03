@@ -40,12 +40,26 @@ interface Particle
 {
 	//your code here
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle //uses an interface
 {
-	//your code here
+	public void show()
+	{
+		
+	}
+	public void move()
+	{
+
+	}
 }
-class JumboParticle //uses inheritance
+class JumboParticle implements Particle
 {
-	//your code here
+	public void show()
+	{
+
+	}
+	public void move()
+	{
+		
+	}
 }
 
