@@ -1,4 +1,4 @@
-NormalParticle [] water = new NormalParticle[10];
+NormalParticle [] water = new NormalParticle[100];
 
 void setup()
 {
@@ -7,16 +7,22 @@ void setup()
 	{
 		water[i] = new NormalParticle();
 	}
+	water[0] = new OddballParticle();
+	water[1] = new JumboParticle();
 
 }
 void draw()
 {
-	water.move();
-	water.show();
+	for (int i=0;i<water.length; i++)
+	{
+		water[i].move();
+		water[i].show();
+	}
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
 	double dX,dY,dSpeed,dTheta;
+	int particleColor;
 	int r = (int)(Math.random()*255);
 	int g = (int)(Math.random()*255);
 	int b = (int)(Math.random()*255);
@@ -25,13 +31,10 @@ class NormalParticle
 	{
 		dX = 256;
 		dY = 256;
-		dTheta = (Math.random()*3)*Math.PI;
 		dSpeed = 8.25;
+		dTheta = (Math.random()*2)*Math.PI;
+		particleColor = color (r,g,b);
 	}
-	
-}
-interface Particle
-{
 	public void move()
 	{
 		dX = dX+Math.cos(dTheta)*dSpeed;
@@ -40,9 +43,15 @@ interface Particle
 	public void show()
 	{
 		noStroke();
-		color c = color(r, g, b);
+		fill(particleColor);
 		ellipse((float)dX, (float)dY, 20, 20);
 	}
+	
+}
+interface Particle
+{
+	public void move();
+	public void show();
 }
 class OddballParticle implements Particle 
 {
