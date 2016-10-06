@@ -3,7 +3,7 @@ Particle [] water = new Particle[100];
 void setup()
 {
 	size(512, 512);
-	frameRate(4.3);
+	//frameRate();
 	for (int i = 0; i<water.length; i++)
 	{
 		water[i] = new NormalParticle();
@@ -14,7 +14,7 @@ void setup()
 }
 void draw()
 {
-	background(255);	 
+	background(25,25,112);	 
 	for (int i=0;i<water.length; i++)
 	{
 		water[i].move();
@@ -24,29 +24,25 @@ void draw()
 class NormalParticle implements Particle
 {
 	double dX,dY,dSpeed,dTheta;
-	int particleColor;
-	int r = (int)(Math.random()*255);
-	int g = (int)(Math.random()*255);
-	int b = (int)(Math.random()*255);
 
 	NormalParticle()
 	{
 		dX = 256;
 		dY = 256;
 		dSpeed = 8.25;
-		dTheta = (Math.random()*2)*Math.PI;
-		particleColor = color (r,g,b);
+		dTheta = Math.random()*Math.PI;
 	}
 	public void move()
 	{
-		dX = dX+Math.cos(dTheta)*dSpeed;
-		dY = dY+Math.sin(dTheta)*dSpeed;
+		dX = dX+Math.cos(2.03)*dSpeed;
+		dY = dY+Math.sin(2.03)*dSpeed;
+
 	}
 	public void show()
 	{
 		noStroke();
-		fill(particleColor);
-		ellipse((float)dX, (float)dY, 20, 20);
+		fill(255);
+		ellipse((float)dX, (float)dY, 2, 2);
 	}
 }
 interface Particle
@@ -56,19 +52,32 @@ interface Particle
 }
 class OddballParticle implements Particle 
 {
-	double x, y, speed, angle;
+	double x, y, speed, angle, directionX, directionY;
 	OddballParticle()
 	{
-		x = 300;
-		y = 200;
-		speed = 2.25;
-		angle= (Math.random()*.2)*Math.PI;
+		directionX = x;
+		directionY = y;
+		x=300;
+		y=20;
 	}
 
 	public void move()
 	{
-		x = x+Math.cos(angle)*speed;
-		y = y+Math.cos(angle)*speed;
+		if (x>512 || y>512)
+		{
+			directionX-=1;
+			directionY-=1;
+		}
+		else if (x<=0 || y<=0)
+		{
+			directionX+=1;
+			directionY+=1;
+		}
+		else
+		{
+			directionX= x+Math.random()*2;
+			directionY = y + Math.random()*2;
+		}
 	}
 	public void show()
 	{
@@ -82,7 +91,7 @@ class JumboParticle extends NormalParticle
 {
 	public void show()
 	{
-		fill(255,20,147);
+		fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
 		ellipse((float)dX, (float)dY, 60, 60);
 	}
 }
