@@ -1,24 +1,24 @@
-Particle [] water = new Particle[100];
+Particle [] glass = new Particle[200];
 
 void setup()
 {
-	size(512, 512);
-	//frameRate();
-	for (int i = 0; i<water.length; i++)
+	size(600, 600);
+	frameRate(50);
+	for (int i = 0; i<glass.length; i++)
 	{
-		water[i] = new NormalParticle();
+		glass[i] = new NormalParticle();
 	}
-	water[1] = new OddballParticle();
-	water[2] = new JumboParticle();
+	glass[0] = new OddballParticle();
+	glass[1] = new JumboParticle();
 
 }
 void draw()
 {
 	background(25,25,112);	 
-	for (int i=0;i<water.length; i++)
+	for (int i=0;i<glass.length; i++)
 	{
-		water[i].move();
-		water[i].show();
+		glass[i].move();
+		glass[i].show();
 	}
 }
 class NormalParticle implements Particle
@@ -29,13 +29,14 @@ class NormalParticle implements Particle
 	{
 		dX = 256;
 		dY = 256;
-		dSpeed = 8.25;
-		dTheta = Math.random()*Math.PI;
+		dSpeed = (double)(Math.random()*2);
+		dTheta = (double)(Math.random()*2*Math.PI);
 	}
 	public void move()
 	{
-		dX = dX+Math.cos(2.03)*dSpeed;
-		dY = dY+Math.sin(2.03)*dSpeed;
+		dX = dX+Math.cos(dTheta)*dSpeed;
+		dY = dY+Math.sin(dTheta)*dSpeed;
+		dTheta+=0.01;
 
 	}
 	public void show()
@@ -52,38 +53,45 @@ interface Particle
 }
 class OddballParticle implements Particle 
 {
-	double x, y, speed, angle, directionX, directionY;
+	float x, y, speed, angle;
+	int dX=1;
+	int dY=1;
 	OddballParticle()
 	{
-		directionX = x;
-		directionY = y;
-		x=300;
-		y=20;
+		x= (float)(Math.random()*14);
+		y=(float)(Math.random()*20);
+		speed=(float)(Math.random()*2*Math.PI);
+		angle=(float)(Math.random()*3);
 	}
 
 	public void move()
 	{
-		if (x>512 || y>512)
+		if(x<6)
 		{
-			directionX-=1;
-			directionY-=1;
+			dX=1;
 		}
-		else if (x<=0 || y<=0)
+		if(x>526)
 		{
-			directionX+=1;
-			directionY+=1;
+			dX=-1;
 		}
-		else
+		if (y<0)
 		{
-			directionX= x+Math.random()*2;
-			directionY = y + Math.random()*2;
+			dY=1;
 		}
+		if(y>599)
+		{
+			dY=-1;
+		}
+		x+=4*dX+3;
+		y+=4*dY;
 	}
 	public void show()
 	{
 		noStroke();
-		fill(255,127,80);
-		ellipse((float)x, (float)y, 30, 30);
+		fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
+		//ellipse((float)x, (float)y, 30, 30);
+		textSize(20);
+		text("ಥ‿ಥ",(float)x+5, (float)y);
 	}
 
 }
